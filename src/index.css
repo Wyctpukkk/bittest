@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    font-family: 'IBMP', sans-serif;
+    box-sizing: border-box;
+}
+.html {
+    height: full;
+    width: full;
+}
+
+
+@font-face {
+    font-family: 'IBMP';
+    src: url('./assets/fonts/IBMPlexSans-Regular.ttf');
+    font-weight: 400;
+}
+@font-face {
+    font-family: 'IBMP';
+    src: url('./assets/fonts/IBMPlexSans-Medium.ttf');
+    font-weight: 500;
+}
+@font-face {
+    font-family: 'IBMP';
+    src: url('./assets/fonts/IBMPlexSans-SemiBold.ttf');
+    font-weight: 600;
+}
