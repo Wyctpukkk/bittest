@@ -1,8 +1,16 @@
-export const UsersTableRow = () => {
+interface IUserTableRow {
+  setShowAside: (value: boolean) => void;
+}
+
+export const UsersTableRow = ({ setShowAside }: IUserTableRow) => {
+  const showCurrentUser = () => {
+    setShowAside(true);
+  };
   return (
     <>
       <button
         type="button"
+        onClick={showCurrentUser}
         className="flex w-full h-[64px] hover:bg-borderBlue hover:opcaity-50"
       >
         <div className="w-1/2 sm:w-1/6 flex items-center justify-center text-[14px] leading-[18px]">

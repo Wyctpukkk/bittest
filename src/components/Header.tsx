@@ -3,7 +3,7 @@ import suitecase from '../assets/icons/case.svg';
 
 export const Header = () => {
   return (
-    <div className="w-full h-[49px] sm:h-[82px] bg-mainBlue rounded-[17px] px-[24px] py-[16px] flex gap-[44px] justify-between items-center">
+    <header className="w-full h-[49px] sm:h-[82px] bg-mainBlue rounded-[17px] px-[24px] py-[16px] flex gap-[44px] justify-between items-center">
       <div className="w-[97px] text-[22px] font-[600] leading-[29px]">
         BitTest
       </div>
@@ -27,6 +27,6 @@ export const Header = () => {
           <span className="text-[14px] leading-[18px]">Администратор</span>
         </div>
       </div>
-    </div>
+    </header>
   );
 };

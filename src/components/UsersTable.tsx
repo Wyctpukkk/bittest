@@ -1,11 +1,15 @@
 import { UsersTableHeader } from './UsersTableHeader';
 import { UsersTableRow } from './UsersTableRow';
 
-export const UsersTable = () => {
+interface IUsersTable {
+  setShowAside: (value: boolean) => void;
+}
+
+export const UsersTable = ({ setShowAside }: IUsersTable) => {
   return (
     <div className="px-[34px]">
       <UsersTableHeader />
-      <UsersTableRow />
+      <UsersTableRow setShowAside={setShowAside} />
     </div>
   );
 };
