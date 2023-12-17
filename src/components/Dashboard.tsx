@@ -1,13 +1,20 @@
 import { useEffect, useState } from 'react';
+
 import { Search } from './Search';
 import { UsersTable } from './UsersTable';
 import { AsideBlock } from './AsideBlock';
-import { getUserList } from '../api/bitAPI';
+import { getUserList, getUserTransfers } from '../api/bitAPI';
 import { IUserInfo } from '../interfaces/userListInterface';
+import { ITransfer } from '../interfaces/userTransfersInterface';
 
-export const Dashboard = () => {
+interface IDashboard {
+  showAside: boolean;
+  setShowAside: (value: boolean) => void;
+}
+
+export const Dashboard = ({ showAside, setShowAside }: IDashboard) => {
   const [userList, setUserList] = useState<IUserInfo[] | null>(null);
-  const [showAside, setShowAside] = useState<boolean>(false);
+  const [userTransfers, setUserTransfers] = useState<ITransfer[] | null>(null);
 
   useEffect(() => {
     getUserList()
@@ -19,6 +26,11 @@ export const Dashboard = () => {
       });
   }, []);
 
+  const handleGetUserTransfers = async (id: string) => {
+    const transfers = await getUserTransfers(id);
+    setUserTransfers(transfers);
+  };
+
   return (
     <div className="flex-1 w-full bg-mainBlue rounded-[18px]">
       <div className="text-[22px] leading-[29px]">
@@ -28,10 +40,16 @@ export const Dashboard = () => {
       </div>
       <Search />
       {userList && (
-        <UsersTable userList={userList} setShowAside={setShowAside} />
+        <UsersTable
+          userList={userList}
+          setShowAside={setShowAside}
+          handleGetUserTransfers={handleGetUserTransfers}
+        />
       )}
       <div> PAGINATION </div>
-      {showAside && <AsideBlock setShowAside={setShowAside} />}
+      {showAside && userTransfers && (
+        <AsideBlock setShowAside={setShowAside} userTransfers={userTransfers} />
+      )}
     </div>
   );
 };

@@ -1,4 +1,5 @@
 import { IResponseGetUsers } from '../interfaces/userListInterface';
+import { ITransfer } from '../interfaces/userTransfersInterface';
 
 /* eslint-disable no-alert */
 const url = 'https://test.gefara.xyz/api/v1';
@@ -14,7 +15,7 @@ export const getUserList = async (): Promise<IResponseGetUsers> => {
   }
 };
 
-export const getUserTransfers = async (id: number) => {
+export const getUserTransfers = async (id: string): Promise<ITransfer[]> => {
   try {
     const response = await fetch(`${url}/user/${id}/transactions`);
     const data = await response.json();

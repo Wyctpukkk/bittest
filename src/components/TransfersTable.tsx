@@ -1,7 +1,12 @@
+import { ITransfer } from '../interfaces/userTransfersInterface';
 import { TransfersTableHeader } from './TransfersTableHeader';
 import { TransfersTableRow } from './TransfersTableRow';
 
-export const TransfersTable = () => {
+interface ITransfersTable {
+  userTransfers: ITransfer[];
+}
+
+export const TransfersTable = ({ userTransfers }: ITransfersTable) => {
   return (
     <div className="px-[20px]">
       <div className="block w-full h-[1px] bg-borderBlue mt-[18px]" />
@@ -9,7 +14,15 @@ export const TransfersTable = () => {
         История операций
       </div>
       <TransfersTableHeader />
-      <TransfersTableRow />
+      <ul>
+        {userTransfers.map((transfer) => {
+          return (
+            <li key={transfer?.id}>
+              <TransfersTableRow transfer={transfer} />
+            </li>
+          );
+        })}
+      </ul>
     </div>
   );
 };

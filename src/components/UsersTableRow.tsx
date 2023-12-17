@@ -5,12 +5,19 @@ import edit from '../assets/icons/edit.svg';
 interface IUserTableRow {
   userInfo: IUserInfo;
   setShowAside: (value: boolean) => void;
+  handleGetUserTransfers: (value: string) => void;
 }
 
-export const UsersTableRow = ({ userInfo, setShowAside }: IUserTableRow) => {
+export const UsersTableRow = ({
+  userInfo,
+  setShowAside,
+  handleGetUserTransfers,
+}: IUserTableRow) => {
   const showCurrentUser = () => {
     setShowAside(true);
+    handleGetUserTransfers(userInfo?.id);
   };
+
   return (
     <>
       <button
@@ -18,7 +25,7 @@ export const UsersTableRow = ({ userInfo, setShowAside }: IUserTableRow) => {
         onClick={showCurrentUser}
         className="flex justify-around items-center w-full h-[64px] hover:bg-borderBlue hover:opcaity-50"
       >
-        <div className="w-1/2 sm:w-4/12 xl:w-1/6 flex items-center justify-center text-[14px] leading-[18px] overflow-hidden">
+        <div className="w-1/2 sm:w-4/12 xl:w-1/6 flex items-center justify-center text-[14px] leading-[18px]">
           {userInfo?.email}
         </div>
         <div className="w-1/2 sm:w-3/12 xl:w-1/6 flex items-center justify-center text-[14px] leading-[18px]">

@@ -5,9 +5,14 @@ import { UsersTableRow } from './UsersTableRow';
 interface IUsersTable {
   userList: IUserInfo[];
   setShowAside: (value: boolean) => void;
+  handleGetUserTransfers: (value: string) => void;
 }
 
-export const UsersTable = ({ userList, setShowAside }: IUsersTable) => {
+export const UsersTable = ({
+  userList,
+  setShowAside,
+  handleGetUserTransfers,
+}: IUsersTable) => {
   return (
     <div className="px-[34px]">
       <UsersTableHeader />
@@ -15,7 +20,11 @@ export const UsersTable = ({ userList, setShowAside }: IUsersTable) => {
         {userList.map((userInfo) => {
           return (
             <li key={userInfo?.id}>
-              <UsersTableRow userInfo={userInfo} setShowAside={setShowAside} />
+              <UsersTableRow
+                userInfo={userInfo}
+                setShowAside={setShowAside}
+                handleGetUserTransfers={handleGetUserTransfers}
+              />
             </li>
           );
         })}
