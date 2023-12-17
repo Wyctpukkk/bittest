@@ -1,8 +1,13 @@
+import { IUserInfo } from '../interfaces/userListInterface';
+import trash from '../assets/icons/trash.svg';
+import edit from '../assets/icons/edit.svg';
+
 interface IUserTableRow {
+  userInfo: IUserInfo;
   setShowAside: (value: boolean) => void;
 }
 
-export const UsersTableRow = ({ setShowAside }: IUserTableRow) => {
+export const UsersTableRow = ({ userInfo, setShowAside }: IUserTableRow) => {
   const showCurrentUser = () => {
     setShowAside(true);
   };
@@ -11,25 +16,26 @@ export const UsersTableRow = ({ setShowAside }: IUserTableRow) => {
       <button
         type="button"
         onClick={showCurrentUser}
-        className="flex w-full h-[64px] hover:bg-borderBlue hover:opcaity-50"
+        className="flex justify-around items-center w-full h-[64px] hover:bg-borderBlue hover:opcaity-50"
       >
-        <div className="w-1/2 sm:w-1/6 flex items-center justify-center text-[14px] leading-[18px]">
-          Email
+        <div className="w-1/2 sm:w-4/12 xl:w-1/6 flex items-center justify-center text-[14px] leading-[18px] overflow-hidden">
+          {userInfo?.email}
         </div>
-        <div className="w-1/2 sm:w-1/6 flex items-center justify-center text-[14px] leading-[18px]">
-          Имя
+        <div className="w-1/2 sm:w-3/12 xl:w-1/6 flex items-center justify-center text-[14px] leading-[18px]">
+          {userInfo?.name}
         </div>
-        <div className="hidden sm:w-1/6 sm:flex items-center justify-center text-[14px] leading-[18px]">
-          Роль
+        <div className="hidden sm:w-1/12 xl:w-1/6 sm:flex items-center justify-center text-[14px] leading-[18px]">
+          {userInfo?.role}
         </div>
-        <div className="hidden sm:w-1/6 sm:flex items-center justify-center text-[14px] leading-[18px]">
-          Подписка
+        <div className="hidden sm:w-1/12 xl:w-1/6 sm:flex items-center justify-center text-[14px] leading-[18px]">
+          {userInfo?.subscription?.plan?.type}
         </div>
-        <div className="hidden sm:w-1/6 sm:flex items-center justify-center text-[14px] leading-[18px]">
-          Токены
+        <div className="hidden sm:w-1/12 xl:w-1/6 sm:flex items-center justify-center text-[14px] leading-[18px]">
+          {userInfo?.subscription?.tokens}
         </div>
-        <div className="hidden sm:w-1/6 sm:flex items-center justify-center text-[14px] leading-[18px]">
-          Действия
+        <div className="hidden sm:w-1/12 xl:w-1/6 sm:flex items-center justify-center">
+          <img className="w-[18px] h-[18px]" src={trash} alt="delete" />
+          <img className="w-[18px] h-[18px]" src={edit} alt="edit" />
         </div>
       </button>
       <span className="block w-full h-[1px] bg-borderBlue" />
