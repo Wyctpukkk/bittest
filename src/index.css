@@ -5,12 +5,10 @@
 * {
     font-family: 'IBMP', sans-serif;
     box-sizing: border-box;
-}
-.html {
-    height: full;
-    width: full;
-}
+    color:white;
+    font:500;
 
+}
 
 @font-face {
     font-family: 'IBMP';
