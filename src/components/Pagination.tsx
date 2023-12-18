@@ -12,8 +12,6 @@ interface IPagination {
 export const Pagination = ({ userList, setRenderUserPerPage }: IPagination) => {
   const ItemsPerPage = 10;
   const [currentPage, setCurrentPage] = useState<number>(1);
-  console.log(currentPage);
-
   const indexOfLastItem = currentPage * ItemsPerPage;
   const indexOfFirstItem = indexOfLastItem - ItemsPerPage;
   const currentItems = userList.slice(indexOfFirstItem, indexOfLastItem);
@@ -26,7 +24,7 @@ export const Pagination = ({ userList, setRenderUserPerPage }: IPagination) => {
 
   useEffect(() => {
     setRenderUserPerPage(currentItems);
-  }, [currentPage]);
+  }, [currentPage, userList]);
 
   const setPrevPage = () => {
     if (currentPage > 1) {
@@ -41,7 +39,11 @@ export const Pagination = ({ userList, setRenderUserPerPage }: IPagination) => {
   };
 
   return (
-    <ul className="flex gap-[4px] justify-center items-center pt-[24px] pb-[45px]">
+    <ul
+      className={`${
+        userList.length <= ItemsPerPage ? 'hidden' : ''
+      } flex gap-[4px] justify-center items-center pt-[24px] pb-[45px]`}
+    >
       <button onClick={setPrevPage} className="rotate-90" type="button">
         <img src={arrow} alt="prevpage" />
       </button>

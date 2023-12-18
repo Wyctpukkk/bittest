@@ -6,7 +6,6 @@ import { AsideBlock } from './AsideBlock';
 import { getUserList, getUserTransfers } from '../api/bitAPI';
 import { IUserInfo } from '../interfaces/userListInterface';
 import { ITransfer } from '../interfaces/userTransfersInterface';
-import { Pagination } from './Pagination';
 
 interface IDashboard {
   showAside: boolean;
@@ -16,7 +15,6 @@ interface IDashboard {
 export const Dashboard = ({ showAside, setShowAside }: IDashboard) => {
   const [sortToSmall, setSortToSmall] = useState(true);
   const [userList, setUserList] = useState<IUserInfo[] | null>(null);
-  const [renderUserPerPage, setRenderUserPerPage] = useState<IUserInfo[] | null>(null);
   const [currentUser, setCurrentUser] = useState<string | null>(null);
   const [chartData, setChartData] = useState<number[] | null>(null);
   const [userTransfers, setUserTransfers] = useState<ITransfer[] | null>(null);
@@ -64,16 +62,15 @@ export const Dashboard = ({ showAside, setShowAside }: IDashboard) => {
         <div className="pt-[24px] ml-[34px] font-[600]">Пользователи</div>
       </div>
       <Search handleGetUsersList={handleGetUsersList} />
-      {renderUserPerPage && (
+      {userList && (
         <UsersTable
-          userList={renderUserPerPage}
+          userList={userList}
           setShowAside={setShowAside}
           handleGetUserTransfers={handleGetUserTransfers}
           sortToSmall={sortToSmall}
           setSortToSmall={setSortToSmall}
         />
       )}
-      {userList && <Pagination userList={userList} setRenderUserPerPage={setRenderUserPerPage} />}
       {showAside && userTransfers && currentUser && chartData && (
         <AsideBlock
           chartData={chartData}

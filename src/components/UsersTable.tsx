@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import { IUserInfo } from '../interfaces/userListInterface';
+import { Pagination } from './Pagination';
 import { UsersTableHeader } from './UsersTableHeader';
 import { UsersTableRow } from './UsersTableRow';
 
@@ -17,14 +19,16 @@ export const UsersTable = ({
   sortToSmall,
   setSortToSmall,
 }: IUsersTable) => {
+  const [renderUserPerPage, setRenderUserPerPage] = useState<IUserInfo[]>(userList);
+
+  console.log(userList);
+  console.log(renderUserPerPage);
+
   return (
     <div className="px-[34px]">
-      <UsersTableHeader
-        sortToSmall={sortToSmall}
-        setSortToSmall={setSortToSmall}
-      />
+      <UsersTableHeader sortToSmall={sortToSmall} setSortToSmall={setSortToSmall} />
       <ul className="flex-1">
-        {userList.map((userInfo) => {
+        {renderUserPerPage.map((userInfo) => {
           return (
             <li key={userInfo?.id}>
               <UsersTableRow
@@ -36,6 +40,7 @@ export const UsersTable = ({
           );
         })}
       </ul>
+      {userList && <Pagination userList={userList} setRenderUserPerPage={setRenderUserPerPage} />}
     </div>
   );
 };
