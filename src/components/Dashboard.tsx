@@ -18,14 +18,16 @@ export const Dashboard = ({ showAside, setShowAside }: IDashboard) => {
   const [chartData, setChartData] = useState<number[] | null>(null);
   const [userTransfers, setUserTransfers] = useState<ITransfer[] | null>(null);
 
+  const handleGetUsersList = async (userName?: string) => {
+    const result = await getUserList(userName);
+
+    if (result) {
+      setUserList(result.data);
+    }
+  };
+
   useEffect(() => {
-    getUserList()
-      .then((data) => {
-        setUserList(data.data);
-      })
-      .catch(() => {
-        alert('Сервер не отвечает на запрос getUserList');
-      });
+    handleGetUsersList();
   }, []);
 
   const calculateChartData = (startAmount: number, transfers: ITransfer[]) => {
@@ -58,7 +60,7 @@ export const Dashboard = ({ showAside, setShowAside }: IDashboard) => {
         <span className="block w-full h-[1px] bg-borderBlue mt-[24px]" />
         <div className="pt-[24px] ml-[34px] font-[600]">Пользователи</div>
       </div>
-      <Search />
+      <Search handleGetUsersList={handleGetUsersList} />
       {userList && (
         <UsersTable
           userList={userList}

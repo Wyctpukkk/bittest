@@ -9,7 +9,7 @@ function App() {
   return (
     <div
       className={`bg-darkBlue ${
-        showAside ? 'h-[100vh] overflow-hidden' : 'h-full'
+        showAside ? 'h-[100vh] overflow-hidden' : 'min-h-[100vh] h-full'
       } w-full px-[25px] py-[34px] flex flex-col gap-[32px]`}
     >
       <Header />

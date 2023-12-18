@@ -1,3 +1,5 @@
+import sortArrow from '../assets/icons/sort.svg';
+
 export const UsersTableHeader = () => {
   return (
     <div className="bg-darkBlue rounded-[8px] flex w-full h-[46px] items-center justify-around">
@@ -15,6 +17,9 @@ export const UsersTableHeader = () => {
       </div>
       <div className="hidden sm:w-1/12 xl:w-1/6 sm:flex items-center justify-center text-[#9CA3AF] text-[14px] leading-[18px]">
         Токены
+        <button type="button">
+          <img src={sortArrow} alt="sort" />
+        </button>
       </div>
       <div className="hidden sm:w-1/12 xl:w-1/6 sm:flex items-center justify-center text-[#9CA3AF] text-[14px] leading-[18px]">
         Действия

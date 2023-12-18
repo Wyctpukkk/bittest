@@ -4,9 +4,15 @@ import { ITransfer } from '../interfaces/userTransfersInterface';
 /* eslint-disable no-alert */
 const url = 'https://test.gefara.xyz/api/v1';
 
-export const getUserList = async (): Promise<IResponseGetUsers> => {
+export const getUserList = async (
+  userName?: string,
+): Promise<IResponseGetUsers> => {
   try {
-    const response = await fetch(`${url}/user/list`);
+    const response = await fetch(
+      `${url}/user/list?orderBy=tokens%3Adesc${
+        userName ? `&search=${userName}` : ''
+      }`,
+    );
     const data = await response.json();
     return data;
   } catch (error) {
