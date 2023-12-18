@@ -1,16 +1,18 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+
 import search from '../assets/icons/search.svg';
+import { IHandleGetUsersList } from '../interfaces/getUserList';
 
 interface ISearch {
-  handleGetUsersList: (value: string) => void;
+  handleGetUsersList: (value: IHandleGetUsersList) => void;
 }
 
-export const Search = ({ handleGetUsersList }: ISearch) => {
+export const Search = React.memo(({ handleGetUsersList }: ISearch) => {
   const [inputValue, setInputValue] = useState<string>('');
 
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
-      handleGetUsersList(inputValue);
+      handleGetUsersList({ userName: inputValue });
     }, 500);
 
     return () => clearTimeout(delayDebounceFn);
@@ -21,11 +23,7 @@ export const Search = ({ handleGetUsersList }: ISearch) => {
   };
   return (
     <div className="relative flex mx-[34px] my-[24px]">
-      <img
-        className="absolute top-[14px] left-[14px]"
-        src={search}
-        alt="search"
-      />
+      <img className="absolute top-[14px] left-[14px]" src={search} alt="search" />
       <input
         value={inputValue}
         onChange={handleChange}
@@ -34,4 +32,4 @@ export const Search = ({ handleGetUsersList }: ISearch) => {
       />
     </div>
   );
-};
+});

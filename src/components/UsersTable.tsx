@@ -9,7 +9,7 @@ interface IUsersTable {
   setShowAside: (value: boolean) => void;
   handleGetUserTransfers: (value: IUserInfo) => void;
   sortToSmall: boolean;
-  setSortToSmall: (value: boolean) => void;
+  getSortToSmall: (value: boolean) => void;
 }
 
 export const UsersTable = ({
@@ -17,16 +17,13 @@ export const UsersTable = ({
   setShowAside,
   handleGetUserTransfers,
   sortToSmall,
-  setSortToSmall,
+  getSortToSmall,
 }: IUsersTable) => {
   const [renderUserPerPage, setRenderUserPerPage] = useState<IUserInfo[]>(userList);
 
-  console.log(userList);
-  console.log(renderUserPerPage);
-
   return (
     <div className="px-[34px]">
-      <UsersTableHeader sortToSmall={sortToSmall} setSortToSmall={setSortToSmall} />
+      <UsersTableHeader sortToSmall={sortToSmall} getSortToSmall={getSortToSmall} />
       <ul className="flex-1">
         {renderUserPerPage.map((userInfo) => {
           return (

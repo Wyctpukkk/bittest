@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 
 import { Search } from './Search';
 import { UsersTable } from './UsersTable';
@@ -6,6 +6,7 @@ import { AsideBlock } from './AsideBlock';
 import { getUserList, getUserTransfers } from '../api/bitAPI';
 import { IUserInfo } from '../interfaces/userListInterface';
 import { ITransfer } from '../interfaces/userTransfersInterface';
+import { IHandleGetUsersList } from '../interfaces/getUserList';
 
 interface IDashboard {
   showAside: boolean;
@@ -19,17 +20,21 @@ export const Dashboard = ({ showAside, setShowAside }: IDashboard) => {
   const [chartData, setChartData] = useState<number[] | null>(null);
   const [userTransfers, setUserTransfers] = useState<ITransfer[] | null>(null);
 
-  const handleGetUsersList = async (userName?: string) => {
-    const result = await getUserList(sortToSmall, userName);
+  const handleGetUsersList = useCallback(
+    async ({ userName = '', sortValue = sortToSmall }: IHandleGetUsersList) => {
+      const result = await getUserList(sortValue, userName);
 
-    if (result) {
-      setUserList(result.data);
-    }
-  };
+      if (result) {
+        setUserList(result.data);
+      }
+    },
+    [],
+  );
 
-  useEffect(() => {
-    handleGetUsersList();
-  }, [sortToSmall]);
+  const getSortToSmall = useCallback((sortValue: boolean) => {
+    setSortToSmall(sortValue);
+    handleGetUsersList({ sortValue });
+  }, []);
 
   const calculateChartData = (startAmount: number, transfers: ITransfer[]) => {
     let initialValue = startAmount;
@@ -47,12 +52,12 @@ export const Dashboard = ({ showAside, setShowAside }: IDashboard) => {
     setChartData(result.reverse());
   };
 
-  const handleGetUserTransfers = async (user: IUserInfo) => {
+  const handleGetUserTransfers = useCallback(async (user: IUserInfo) => {
     const transfers = await getUserTransfers(user?.id);
     setUserTransfers(transfers);
     setCurrentUser(user?.email);
     calculateChartData(user?.subscription?.tokens, transfers);
-  };
+  }, []);
 
   return (
     <div className="flex-1 w-full bg-mainBlue rounded-[18px]">
@@ -68,7 +73,7 @@ export const Dashboard = ({ showAside, setShowAside }: IDashboard) => {
           setShowAside={setShowAside}
           handleGetUserTransfers={handleGetUserTransfers}
           sortToSmall={sortToSmall}
-          setSortToSmall={setSortToSmall}
+          getSortToSmall={getSortToSmall}
         />
       )}
       {showAside && userTransfers && currentUser && chartData && (
