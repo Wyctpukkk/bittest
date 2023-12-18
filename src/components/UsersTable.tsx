@@ -5,7 +5,7 @@ import { UsersTableRow } from './UsersTableRow';
 interface IUsersTable {
   userList: IUserInfo[];
   setShowAside: (value: boolean) => void;
-  handleGetUserTransfers: (value: string) => void;
+  handleGetUserTransfers: (value: IUserInfo) => void;
 }
 
 export const UsersTable = ({

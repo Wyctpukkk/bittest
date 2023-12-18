@@ -5,7 +5,7 @@ import edit from '../assets/icons/edit.svg';
 interface IUserTableRow {
   userInfo: IUserInfo;
   setShowAside: (value: boolean) => void;
-  handleGetUserTransfers: (value: string) => void;
+  handleGetUserTransfers: (value: IUserInfo) => void;
 }
 
 export const UsersTableRow = ({
@@ -15,7 +15,7 @@ export const UsersTableRow = ({
 }: IUserTableRow) => {
   const showCurrentUser = () => {
     setShowAside(true);
-    handleGetUserTransfers(userInfo?.id);
+    handleGetUserTransfers(userInfo);
   };
 
   return (

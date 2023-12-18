@@ -14,6 +14,8 @@ interface IDashboard {
 
 export const Dashboard = ({ showAside, setShowAside }: IDashboard) => {
   const [userList, setUserList] = useState<IUserInfo[] | null>(null);
+  const [currentUser, setCurrentUser] = useState<string | null>(null);
+  const [chartData, setChartData] = useState<number[] | null>(null);
   const [userTransfers, setUserTransfers] = useState<ITransfer[] | null>(null);
 
   useEffect(() => {
@@ -26,9 +28,27 @@ export const Dashboard = ({ showAside, setShowAside }: IDashboard) => {
       });
   }, []);
 
-  const handleGetUserTransfers = async (id: string) => {
-    const transfers = await getUserTransfers(id);
+  const calculateChartData = (startAmount: number, transfers: ITransfer[]) => {
+    let initialValue = startAmount;
+
+    const result = transfers.map((change) => {
+      if (change.type === 'REPLENISH') {
+        initialValue += change.amount;
+      } else {
+        initialValue -= change.amount;
+      }
+
+      return initialValue;
+    });
+
+    setChartData(result.reverse());
+  };
+
+  const handleGetUserTransfers = async (user: IUserInfo) => {
+    const transfers = await getUserTransfers(user?.id);
     setUserTransfers(transfers);
+    setCurrentUser(user?.email);
+    calculateChartData(user?.subscription?.tokens, transfers);
   };
 
   return (
@@ -47,8 +67,13 @@ export const Dashboard = ({ showAside, setShowAside }: IDashboard) => {
         />
       )}
       <div> PAGINATION </div>
-      {showAside && userTransfers && (
-        <AsideBlock setShowAside={setShowAside} userTransfers={userTransfers} />
+      {showAside && userTransfers && currentUser && chartData && (
+        <AsideBlock
+          chartData={chartData}
+          setShowAside={setShowAside}
+          userTransfers={userTransfers}
+          currentUser={currentUser}
+        />
       )}
     </div>
   );
