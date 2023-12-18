@@ -13,13 +13,14 @@ interface IDashboard {
 }
 
 export const Dashboard = ({ showAside, setShowAside }: IDashboard) => {
+  const [sortToSmall, setSortToSmall] = useState(true);
   const [userList, setUserList] = useState<IUserInfo[] | null>(null);
   const [currentUser, setCurrentUser] = useState<string | null>(null);
   const [chartData, setChartData] = useState<number[] | null>(null);
   const [userTransfers, setUserTransfers] = useState<ITransfer[] | null>(null);
 
   const handleGetUsersList = async (userName?: string) => {
-    const result = await getUserList(userName);
+    const result = await getUserList(sortToSmall, userName);
 
     if (result) {
       setUserList(result.data);
@@ -28,7 +29,7 @@ export const Dashboard = ({ showAside, setShowAside }: IDashboard) => {
 
   useEffect(() => {
     handleGetUsersList();
-  }, []);
+  }, [sortToSmall]);
 
   const calculateChartData = (startAmount: number, transfers: ITransfer[]) => {
     let initialValue = startAmount;
@@ -66,6 +67,8 @@ export const Dashboard = ({ showAside, setShowAside }: IDashboard) => {
           userList={userList}
           setShowAside={setShowAside}
           handleGetUserTransfers={handleGetUserTransfers}
+          sortToSmall={sortToSmall}
+          setSortToSmall={setSortToSmall}
         />
       )}
       <div> PAGINATION </div>
