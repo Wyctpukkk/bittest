@@ -22,12 +22,12 @@ export const UsersTableRow = React.memo(
         <button
           type="button"
           onClick={showCurrentUser}
-          className="flex justify-around items-center w-full h-[64px] hover:bg-borderBlue hover:opcaity-50"
+          className="flex gap-[1px] justify-around items-center w-full h-[64px] hover:bg-borderBlue hover:opcaity-50"
         >
-          <div className="w-1/2 sm:w-4/12 xl:w-1/6 flex items-center justify-center text-[14px] leading-[18px]">
+          <div className="w-1/2 sm:w-4/12 xl:w-1/6 flex items-center justify-center text-[14px] leading-[18px] overflow-hidden">
             {userInfo?.email}
           </div>
-          <div className="w-1/2 sm:w-3/12 xl:w-1/6 flex items-center justify-center text-[14px] leading-[18px]">
+          <div className="w-1/2 sm:w-3/12 xl:w-1/6 flex items-center justify-center text-[14px] leading-[18px] overflow-hidden">
             {userInfo?.name}
           </div>
           <div className="hidden sm:w-1/12 xl:w-1/6 sm:flex items-center justify-center text-[14px] leading-[18px]">

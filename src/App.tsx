@@ -10,9 +10,11 @@ function App() {
     <div
       className={`bg-darkBlue ${
         showAside ? 'h-[100vh] overflow-hidden' : 'min-h-[100vh] h-full'
-      } w-full px-[25px] py-[34px] flex flex-col gap-[32px]`}
+      } w-full sm:px-[25px] py-[27px] sm:py-[34px] flex flex-col gap-[32px]`}
     >
-      <Header />
+      <div className="px-[15px] sm:px-[0px]">
+        <Header />
+      </div>
       <Dashboard showAside={showAside} setShowAside={setShowAside} />
     </div>
   );

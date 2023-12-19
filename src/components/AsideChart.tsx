@@ -121,7 +121,7 @@ export const AsideChart = ({ chartData }: IAsideChart) => {
   }, []);
 
   return (
-    <div className="w-[450px] h-[350px] ml-[-44px] mt-[-58px]">
+    <div className="w-[375px] sm:w-[450px] h-[350px] ml-[-44px] mt-[-58px]">
       <div ref={chartRef} style={{ width: '100%', height: '100%' }} />
     </div>
   );

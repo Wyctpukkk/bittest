@@ -69,8 +69,8 @@ export const Dashboard = ({ showAside, setShowAside }: IDashboard) => {
   }, []);
 
   return (
-    <div className="flex-1 w-full bg-mainBlue rounded-[18px]">
-      <div className="text-[22px] leading-[29px]">
+    <div className="flex-1 w-full bg-mainBlue sm:rounded-[18px]">
+      <div className="text-[18px] sm:text-[20px] md:text-[22px] leading-[29px]">
         <div className="pt-[24px] ml-[34px] font-[600]">Моя организация</div>
         <span className="block w-full h-[1px] bg-borderBlue mt-[24px]" />
         <div className="pt-[24px] ml-[34px] font-[600]">Пользователи</div>
