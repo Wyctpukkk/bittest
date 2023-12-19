@@ -1,9 +1,10 @@
 import { TransfersTable } from './TransfersTable';
 import close from '../assets/icons/close.svg';
 import { ITransfer } from '../interfaces/userTransfersInterface';
+import { IChartData } from '../interfaces/getUserList';
 
 interface IAsideBlock {
-  chartData: number[];
+  chartData: IChartData;
   currentUser: string;
   setShowAside: (value: boolean) => void;
   userTransfers: ITransfer[];
@@ -20,9 +21,7 @@ export const AsideBlock = ({
       <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-1" />
       <aside className="fixed top-0 right-0 w-[470px] h-full bg-mainBlue z-100 overflow-auto">
         <div className="flex justify-between items-center pt-[56px] px-[20px]">
-          <div className="text-[20px] font-[600] leading-[26px]">
-            {currentUser}
-          </div>
+          <div className="text-[20px] font-[600] leading-[26px]">{currentUser}</div>
           <button onClick={() => setShowAside(false)} type="button">
             <img src={close} alt="close" />
           </button>

@@ -6,7 +6,8 @@ import { AsideBlock } from './AsideBlock';
 import { getUserList, getUserTransfers } from '../api/bitAPI';
 import { IUserInfo } from '../interfaces/userListInterface';
 import { ITransfer } from '../interfaces/userTransfersInterface';
-import { IHandleGetUsersList } from '../interfaces/getUserList';
+import { IChartData, IHandleGetUsersList } from '../interfaces/getUserList';
+import { formatDateToChart } from '../helpers/dateCalculator';
 
 interface IDashboard {
   showAside: boolean;
@@ -17,7 +18,7 @@ export const Dashboard = ({ showAside, setShowAside }: IDashboard) => {
   const [sortToSmall, setSortToSmall] = useState(true);
   const [userList, setUserList] = useState<IUserInfo[] | null>(null);
   const [currentUser, setCurrentUser] = useState<string | null>(null);
-  const [chartData, setChartData] = useState<number[] | null>(null);
+  const [chartData, setChartData] = useState<IChartData | null>(null);
   const [userTransfers, setUserTransfers] = useState<ITransfer[] | null>(null);
 
   const handleGetUsersList = useCallback(
@@ -39,17 +40,25 @@ export const Dashboard = ({ showAside, setShowAside }: IDashboard) => {
   const calculateChartData = (startAmount: number, transfers: ITransfer[]) => {
     let initialValue = startAmount;
 
-    const result = transfers.map((change) => {
-      if (change.type === 'REPLENISH') {
-        initialValue += change.amount;
-      } else {
-        initialValue -= change.amount;
-      }
+    const valueData = transfers
+      .map((change) => {
+        if (change.type === 'REPLENISH') {
+          initialValue += change.amount;
+        } else {
+          initialValue -= change.amount;
+        }
 
-      return initialValue;
-    });
+        return initialValue;
+      })
+      .reverse();
 
-    setChartData(result.reverse());
+    const categoryData = transfers
+      .map((transfer) => {
+        return formatDateToChart(transfer.created_at);
+      })
+      .reverse();
+
+    setChartData({ categoryData, valueData });
   };
 
   const handleGetUserTransfers = useCallback(async (user: IUserInfo) => {

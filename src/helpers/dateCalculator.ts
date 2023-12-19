@@ -1,3 +1,5 @@
+const months = ['Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн', 'Июл', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек'];
+
 export const formatDate = (inputDate: string) => {
   const date = new Date(inputDate);
 
@@ -16,4 +18,13 @@ export const formatTime = (inputDate: string) => {
   const seconds = String(date.getUTCSeconds()).padStart(2, '0');
 
   return `${hours}:${minutes}:${seconds}`;
+};
+
+export const formatDateToChart = (inputDate: string) => {
+  const date = new Date(inputDate);
+  const day = date.getDate();
+  const month = months[date.getMonth()];
+  const year = date.getFullYear();
+
+  return `${day < 10 ? '0' : ''}${day} ${month} ${year}`;
 };
