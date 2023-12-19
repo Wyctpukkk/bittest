@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { IUserInfo } from '../interfaces/userListInterface';
-import trash from '../assets/icons/trash.svg';
-import edit from '../assets/icons/edit.svg';
+import { IUserInfo } from '../../interfaces/userListInterface';
+import trash from '../../assets/icons/trash.svg';
+import edit from '../../assets/icons/edit.svg';
 
 interface IUserTableRow {
   userInfo: IUserInfo;

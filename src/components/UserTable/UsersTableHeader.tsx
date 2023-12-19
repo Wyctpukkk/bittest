@@ -1,4 +1,4 @@
-import sortArrow from '../assets/icons/sort.svg';
+import sortArrow from '../../assets/icons/sort.svg';
 
 interface IUsersTableHeader {
   sortToSmall: boolean;

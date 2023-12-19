@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { IUserInfo } from '../interfaces/userListInterface';
-import { Pagination } from './Pagination';
+import { IUserInfo } from '../../interfaces/userListInterface';
+import { Pagination } from '../Pagination';
 import { UsersTableHeader } from './UsersTableHeader';
 import { UsersTableRow } from './UsersTableRow';
 

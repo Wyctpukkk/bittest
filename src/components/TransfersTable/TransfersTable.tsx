@@ -1,6 +1,6 @@
-import { IChartData } from '../interfaces/getUserList';
-import { ITransfer } from '../interfaces/userTransfersInterface';
-import { AsideChart } from './AsideChart';
+import { IChartData } from '../../interfaces/getUserList';
+import { ITransfer } from '../../interfaces/userTransfersInterface';
+import { AsideChart } from '../AsideChart';
 import { TransfersTableHeader } from './TransfersTableHeader';
 import { TransfersTableRow } from './TransfersTableRow';
 

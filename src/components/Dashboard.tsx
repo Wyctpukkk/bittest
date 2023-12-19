@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 
 import { Search } from './Search';
-import { UsersTable } from './UsersTable';
+import { UsersTable } from './UserTable/UsersTable';
 import { AsideBlock } from './AsideBlock';
 import { getUserList, getUserTransfers } from '../api/bitAPI';
 import { IUserInfo } from '../interfaces/userListInterface';

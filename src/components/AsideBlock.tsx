@@ -1,4 +1,4 @@
-import { TransfersTable } from './TransfersTable';
+import { TransfersTable } from './TransfersTable/TransfersTable';
 import close from '../assets/icons/close.svg';
 import { ITransfer } from '../interfaces/userTransfersInterface';
 import { IChartData } from '../interfaces/getUserList';
